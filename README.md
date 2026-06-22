@@ -1,22 +1,22 @@
 # Tool
 
-Raccolta di guide, comandi e riferimenti rapidi per strumenti di uso quotidiano in ambito DevOps, sistemistica e sviluppo software.
+Collection of guides, commands and quick references for DevOps, system administration and software development tools.
 
 ---
 
-## Struttura
+## Structure
 
 ```
 Tool/
 ├── README.md
-├── Linux/       # Strumenti e comandi Linux
-└── Docker/      # Comandi e riferimenti Docker
+├── Linux/       # Linux tools and commands
+└── Docker/      # Docker commands and references
 ```
 
-Ogni sezione contiene un `README.md` introduttivo e un file `tools.md` con il riferimento completo dei comandi.
+Each section contains an introductory `README.md` and a `tools.md` file with the complete command reference.
 
 ---
 
-## Licenza
+## License
 
 MIT
