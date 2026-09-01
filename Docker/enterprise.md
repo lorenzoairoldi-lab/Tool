@@ -119,6 +119,49 @@ docker stack deploy -c stack.yml production; docker stack services production
 
 ---
 
+## Spiegazione comando per comando
+
+| Comando | Spiegazione semplice |
+|---|---|
+| `docker version` | Mostra versione del client e del daemon. |
+| `docker info` | Riassume runtime, storage, reti e risorse Docker. |
+| `docker system df` | Mostra quanto spazio usano immagini, container, volumi e cache. |
+| `docker pull` | Scarica un'immagine dal registry. |
+| `docker build -t` | Costruisce un'immagine e le assegna un nome/tag. |
+| `docker tag` | Crea un nuovo riferimento alla stessa immagine. |
+| `docker history` | Mostra i layer che compongono l'immagine. |
+| `docker inspect` | Restituisce configurazione e stato in JSON. |
+| `docker run` | Crea e avvia un nuovo container. |
+| `docker ps -a` | Elenca container attivi e fermi. |
+| `docker start/stop/restart` | Avvia, ferma o riavvia un container esistente. |
+| `docker logs -f` | Mostra i log e continua a seguirli in tempo reale. |
+| `docker exec -it` | Apre una shell interattiva dentro un container attivo. |
+| `docker cp` | Copia file tra host e container. |
+| `docker top` | Mostra i processi del container. |
+| `docker stats` | Misura CPU, RAM, rete e I/O del container. |
+| `docker volume create` | Crea storage persistente gestito da Docker. |
+| `docker network create` | Crea una rete privata per collegare container. |
+| `docker network connect` | Aggiunge un container a una rete esistente. |
+| `docker rm -f` | Ferma e rimuove un container, anche se attivo. Usarlo con cautela. |
+| `docker compose config` | Valida e mostra la configurazione Compose finale. |
+| `docker compose up -d` | Avvia i servizi in background. |
+| `docker compose down` | Ferma e rimuove servizi e reti del progetto. |
+| `docker compose pull` | Scarica le nuove immagini definite nel file Compose. |
+| `docker compose exec` | Esegue un comando in un servizio già attivo. |
+| `docker context ls` | Elenca i daemon Docker disponibili. |
+| `docker --context prod` | Esegue il comando contro il daemon indicato. |
+| `docker buildx build` | Costruisce immagini con BuildKit, anche multi-architettura. |
+| `docker buildx imagetools inspect` | Mostra manifest e architetture pubblicate nel registry. |
+| `docker scout cves` | Cerca vulnerabilità note nei componenti dell'immagine. |
+| `docker events` | Mostra gli eventi del daemon in tempo reale. |
+| `docker diff` | Mostra i file cambiati rispetto all'immagine originale. |
+| `docker save/load` | Esporta o importa immagini tramite archivio locale. |
+| `docker system prune` | Rimuove dati inutilizzati; usare sempre filtri in produzione. |
+| `docker secret/config ls` | Elenca secret o configurazioni gestiti da Docker Swarm. |
+| `docker swarm init` | Crea un cluster Swarm con il nodo corrente come manager. |
+| `docker service ls` | Elenca i servizi Swarm distribuiti. |
+| `docker stack deploy` | Distribuisce uno stack di servizi Swarm da YAML. |
+
 ## Regole rapide
 
 - Non usare `--privileged` se non indispensabile; preferire `--cap-drop=ALL` e capability mirate.

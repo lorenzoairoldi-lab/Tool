@@ -204,6 +204,60 @@ kubectl get rs,pods -l app=<app> -o wide
 
 ---
 
+## Spiegazione comando per comando
+
+| Comando | Spiegazione semplice |
+|---|---|
+| `kubectl help` | Mostra l'aiuto generale e la sintassi dei comandi. |
+| `kubectl api-resources` | Elenca le risorse disponibili nel cluster. |
+| `kubectl explain` | Spiega i campi di una risorsa, direttamente dalla API. |
+| `kubectl cluster-info` | Verifica che il cluster risponda e mostra gli endpoint principali. |
+| `kubectl config get-contexts` | Elenca i cluster e le identità configurate localmente. |
+| `kubectl config current-context` | Mostra il cluster verso cui stai operando. |
+| `kubectl config set-context` | Imposta il namespace predefinito del contesto corrente. |
+| `kubectl get` | Elenca risorse o mostra una risorsa specifica. |
+| `kubectl describe` | Mostra dettagli leggibili ed eventi di una risorsa. |
+| `kubectl apply -f` | Crea o aggiorna risorse a partire da un manifest. |
+| `kubectl apply -k` | Applica una directory Kustomize con overlay e variabili. |
+| `kubectl diff` | Mostra cosa cambierebbe senza applicarlo. |
+| `kubectl delete` | Elimina una risorsa; richiede particolare attenzione in produzione. |
+| `kubectl label/annotate` | Aggiunge metadati usati da selettori e strumenti esterni. |
+| `kubectl scale` | Cambia il numero desiderato di repliche. |
+| `kubectl wait` | Attende che una condizione, ad esempio Available, diventi vera. |
+| `kubectl logs` | Legge i log di uno o più container. Con `--previous` legge il container precedente. |
+| `kubectl exec` | Esegue un comando dentro un container. |
+| `kubectl port-forward` | Crea un tunnel locale verso pod o service per debug. |
+| `kubectl create job/cronjob` | Crea un'attività una tantum o pianificata. |
+| `kubectl create configmap` | Crea configurazione non segreta da file o valori. |
+| `kubectl create secret` | Crea dati sensibili codificati per i pod. Non stampa i valori nei ticket. |
+| `kubectl patch` | Modifica solo alcuni campi di una risorsa esistente. |
+| `kubectl rollout status` | Attende e mostra l'avanzamento di un aggiornamento. |
+| `kubectl rollout history` | Mostra le revisioni disponibili per un rollback. |
+| `kubectl rollout undo` | Ripristina una revisione precedente. |
+| `kubectl rollout restart` | Ricrea progressivamente i pod senza cambiare l'immagine. |
+| `kubectl rollout pause/resume` | Sospende o riprende un rollout per applicare più modifiche insieme. |
+| `kubectl set image` | Cambia l'immagine di un workload e avvia il relativo rollout. |
+| `kubectl top` | Mostra consumo CPU e memoria, se Metrics Server è installato. |
+| `kubectl get events` | Elenca eventi di scheduling, errori e aggiornamenti recenti. |
+| `kubectl auth can-i` | Verifica se un utente o service account può compiere un'azione. |
+| `kubectl get rolebinding` | Mostra quali ruoli sono assegnati a utenti o service account. |
+| `kubectl get svc/endpointslice` | Verifica service e pod backend realmente raggiungibili. |
+| `kubectl get pvc/pv` | Mostra richieste e volumi persistenti. |
+| `kubectl get resourcequota/limitrange` | Mostra limiti e quote di risorse applicati a un namespace. |
+| `kubectl get crd` | Elenca le risorse personalizzate installate nel cluster. |
+| `kubectl get leases` | Mostra lease usati, tra l'altro, per leader election. |
+| `kubectl run` | Crea un pod temporaneo, utile per test DNS o rete. |
+| `kubectl attach` | Collega il terminale a un processo già attivo nel container. |
+| `kubectl cp` | Copia file tra pod e macchina locale. |
+| `kubectl cordon` | Impedisce nuovi pod su un nodo senza fermare quelli già presenti. |
+| `kubectl drain` | Svuota un nodo spostando i pod gestiti da controller. |
+| `kubectl uncordon` | Rende nuovamente schedulabili nuovi pod sul nodo. |
+| `kubectl debug` | Avvia un ambiente temporaneo per diagnosticare pod o nodi. |
+| `kubectl proxy` | Espone localmente l'API Kubernetes tramite il kubeconfig corrente. |
+| `kubectl get --raw` | Interroga direttamente endpoint dell'API, utile per health check. |
+| `kubectl replace --force` | Ricrea una risorsa: può causare downtime, usarlo solo eccezionalmente. |
+| `kubectl auth reconcile` | Confronta e allinea regole RBAC con un manifest. |
+
 ## Sicurezza operativa
 
 - Preferire namespace espliciti e `-n production` nei runbook condivisi.

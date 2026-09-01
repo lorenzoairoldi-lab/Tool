@@ -114,6 +114,63 @@ perf top -p <PID>; strace -ff -p <PID> -e trace=network,file -tt
 
 ---
 
+## Spiegazione comando per comando
+
+| Comando | Spiegazione semplice |
+|---|---|
+| `pwd` | Mostra la directory in cui ti trovi. |
+| `ls -lah` | Elenca anche file nascosti, dimensioni e permessi in formato leggibile. |
+| `cd /var/log` | Entra nella directory indicata. |
+| `mkdir -p` | Crea directory e, con `-p`, anche quelle intermedie mancanti. |
+| `cp -a` | Copia file o directory preservando permessi e metadati. |
+| `mv` | Sposta o rinomina un file. |
+| `rm -i` | Elimina chiedendo conferma: utile per evitare errori. |
+| `stat` | Mostra dimensione, proprietario, permessi e date di un file. |
+| `less` | Legge un file pagina per pagina senza modificarlo. |
+| `grep -n` | Cerca testo e mostra anche il numero di riga. |
+| `sort \| uniq -c` | Ordina le righe e conta quante volte compare ciascuna. |
+| `sed` | Seleziona o modifica testo automaticamente. |
+| `awk` | Estrae colonne e produce report da testo strutturato. |
+| `find` | Cerca file usando nome, età, dimensione o altri criteri. |
+| `tar -czf` | Crea un archivio compresso `.tgz`. |
+| `tar -tzf` | Elenca il contenuto di un archivio senza estrarlo. |
+| `tar -xzf` | Estrae un archivio compresso. |
+| `whoami` / `id` | Mostrano l'utente corrente, UID, GID e gruppi. |
+| `sudo -l` | Mostra quali comandi l'utente può eseguire come amministratore. |
+| `chmod 640` | Imposta i permessi: proprietario lettura/scrittura, gruppo sola lettura. |
+| `chown app:app` | Cambia proprietario e gruppo di un file. |
+| `getent` | Cerca utenti o gruppi usando la configurazione directory del sistema. |
+| `apt update` | Aggiorna l'elenco dei pacchetti disponibili. |
+| `apt install` | Installa un pacchetto e le sue dipendenze. |
+| `rpm -qa` | Elenca i pacchetti installati su sistemi RPM. |
+| `hostnamectl` | Mostra o modifica il nome e le informazioni dell'host. |
+| `uptime` | Mostra da quanto il server è attivo e il carico medio. |
+| `free -h` | Mostra memoria RAM e swap in unità leggibili. |
+| `df -hT` | Mostra spazio libero e tipo dei filesystem. |
+| `ps aux` | Elenca i processi attivi e il loro consumo. |
+| `ss -lntup` | Mostra porte in ascolto e processi associati. |
+| `systemctl status` | Mostra lo stato e gli ultimi log di un servizio systemd. |
+| `journalctl -u` | Legge i log di uno specifico servizio. |
+| `journalctl -p` | Filtra i log per gravità, ad esempio warning o errori. |
+| `pidstat` | Misura CPU, memoria, disco e I/O per processo. |
+| `iostat` | Mostra carico CPU e tempi di risposta dei dischi. |
+| `vmstat` | Riassume memoria, processi, swap e I/O. |
+| `sar` | Legge statistiche di sistema raccolte nel tempo. |
+| `resolvectl query` | Verifica come il sistema risolve un nome DNS. |
+| `curl -I` | Invia una richiesta HTTP e mostra solo gli header. |
+| `openssl s_client` | Verifica handshake, certificato e protocollo TLS. |
+| `ip route` | Mostra le rotte usate per raggiungere le reti. |
+| `tcpdump` | Cattura pacchetti per capire cosa transita sulla rete. |
+| `lsblk` / `findmnt` | Mostrano dischi, partizioni e relativi mount point. |
+| `lsof +L1` | Trova file eliminati ma ancora tenuti aperti da processi. |
+| `crontab -l` | Mostra i job pianificati dell'utente corrente. |
+| `systemctl enable --now` | Abilita un servizio all'avvio e lo avvia subito. |
+| `sha256sum` | Calcola un checksum per verificare l'integrità di un file. |
+| `ausearch` | Cerca eventi di sicurezza nel Linux Audit log. |
+| `nft list ruleset` | Mostra le regole firewall attive senza modificarle. |
+| `strace` | Mostra le system call eseguite da un processo per diagnosticare blocchi. |
+| `perf top` | Mostra in tempo reale dove un processo usa CPU. |
+
 ## Note operative
 
 - Preferire `systemctl stop` e rollout controllati a kill forzati.
