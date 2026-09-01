@@ -19,4 +19,10 @@ Each section contains an introductory `README.md` and a `tools.md` file with the
 
 ## License
 
+## Sections
+
+- `Linux/` — comandi generali e operativi enterprise (`enterprise.md`).
+- `Docker/` — comandi Docker/Compose e operatività enterprise (`enterprise.md`).
+- `Kubernetes/` — comandi `kubectl` organizzati per Base, Intermedio ed Esperto.
+
 MIT
