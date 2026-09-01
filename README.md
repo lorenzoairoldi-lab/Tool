@@ -30,6 +30,12 @@ Prima di eseguire un comando verifica ambiente, contesto, namespace e target. I 
 che eliminano risorse, modificano firewall o permessi, eseguono `drain`, `prune` o
 rollback devono essere eseguiti con autorizzazione e con un piano di ripristino.
 
+## Git
+
+La guida Git è disponibile in [Git/tools.md](./Git/tools.md) e contiene i comandi dalla
+configurazione iniziale fino a branch, merge, rebase, troubleshooting e gestione avanzata
+della cronologia.
+
 ## Licenza
 
 MIT
