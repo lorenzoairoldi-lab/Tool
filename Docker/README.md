@@ -55,4 +55,4 @@ Il documento di riferimento principale. Contiene un elenco completo e categorizz
 
 Per il riferimento completo ai comandi, consulta [tools.md](./tools.md).
 
-Per i comandi enterprise divisi per livello consulta [enterprise.md](./enterprise.md).
+Per i comandi enterprise divisi per livello consulta [tools.md](./tools.md).

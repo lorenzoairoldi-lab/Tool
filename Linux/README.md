@@ -38,6 +38,6 @@ Nessuno. I tool elencati sono disponibili nativamente o tramite i gestori pacche
 
 ## Licenza
 
-Per i runbook aziendali progressivi consulta [enterprise.md](./enterprise.md).
+Per i runbook aziendali progressivi consulta le sezioni Base, Intermedio ed Esperto di [tools.md](./tools.md).
 
 MIT

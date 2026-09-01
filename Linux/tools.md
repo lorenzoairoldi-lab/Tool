@@ -932,6 +932,174 @@ Elenco completo dei tool più utilizzati nei sistemi Linux (Debian, Ubuntu e der
 
 ---
 
+## 12. Operatività enterprise — Base
+
+### `hostnamectl`
+**Comando:** `hostnamectl`
+**Spiegazione:** Mostra nome, sistema operativo, kernel e architettura del server.
+**Esempio:** `hostnamectl`
+
+### `uptime`
+**Comando:** `uptime`
+**Spiegazione:** Mostra da quanto il server è attivo e il carico medio.
+**Esempio:** `uptime`
+
+### `free`
+**Comando:** `free -h`
+**Spiegazione:** Mostra RAM e swap disponibili in formato leggibile.
+**Esempio:** `free -h`
+
+### `df`
+**Comando:** `df -hT`
+**Spiegazione:** Mostra spazio usato, libero e tipo dei filesystem.
+**Esempio:** `df -hT`
+
+### `du`
+**Comando:** `du -xhd1 DIRECTORY`
+**Spiegazione:** Mostra quanto spazio occupa ogni sottodirectory.
+**Esempio:** `du -xhd1 /var | sort -h`
+
+### `ps`
+**Comando:** `ps aux --sort=-%cpu`
+**Spiegazione:** Elenca i processi e ordina quelli che consumano più CPU.
+**Esempio:** `ps aux --sort=-%cpu | head -20`
+
+### `ss`
+**Comando:** `ss -lntup`
+**Spiegazione:** Mostra porte TCP/UDP in ascolto e processi associati.
+**Esempio:** `ss -lntup`
+
+### `systemctl status`
+**Comando:** `systemctl status SERVIZIO`
+**Spiegazione:** Mostra stato, PID e ultimi messaggi di un servizio systemd.
+**Esempio:** `systemctl status nginx --no-pager`
+
+### `journalctl`
+**Comando:** `journalctl -u SERVIZIO --since '1 hour ago'`
+**Spiegazione:** Legge i log recenti del servizio indicato.
+**Esempio:** `journalctl -u nginx --since '1 hour ago' --no-pager`
+
+### `find`
+**Comando:** `find DIRECTORY -type f -name PATTERN -mtime GIORNI`
+**Spiegazione:** Cerca file filtrandoli per tipo, nome o data di modifica.
+**Esempio:** `find /var/log -type f -name '*.log' -mtime -7 -print`
+
+## 13. Operatività enterprise — Intermedio
+
+### `pidstat`
+**Comando:** `pidstat -dur INTERVALLO CONTEGGIO`
+**Spiegazione:** Misura CPU, memoria, disco e I/O per processo nel tempo.
+**Esempio:** `pidstat -dur 2 5`
+
+### `iostat`
+**Comando:** `iostat -xz INTERVALLO CONTEGGIO`
+**Spiegazione:** Misura prestazioni CPU e tempi di risposta dei dischi.
+**Esempio:** `iostat -xz 2 5`
+
+### `vmstat`
+**Comando:** `vmstat INTERVALLO CONTEGGIO`
+**Spiegazione:** Riassume memoria, swap, processi e I/O del sistema.
+**Esempio:** `vmstat 2 5`
+
+### `sar`
+**Comando:** `sar -n DEV INTERVALLO CONTEGGIO`
+**Spiegazione:** Mostra statistiche storiche o correnti delle interfacce di rete.
+**Esempio:** `sar -n DEV 2 5`
+
+### `resolvectl`
+**Comando:** `resolvectl query HOSTNAME`
+**Spiegazione:** Verifica quale indirizzo restituisce il resolver DNS del server.
+**Esempio:** `resolvectl query api.example.com`
+
+### `curl`
+**Comando:** `curl -fsS --connect-timeout 5 URL`
+**Spiegazione:** Testa un endpoint HTTP fallendo anche su errori server e timeout.
+**Esempio:** `curl -fsS --connect-timeout 5 https://api.example.com/health`
+
+### `openssl s_client`
+**Comando:** `openssl s_client -connect HOST:PORT -servername HOST`
+**Spiegazione:** Verifica handshake TLS e certificato presentato dal server.
+**Esempio:** `openssl s_client -connect api.example.com:443 -servername api.example.com </dev/null`
+
+### `ip route`
+**Comando:** `ip route`
+**Spiegazione:** Mostra le rotte che il kernel usa per raggiungere le reti.
+**Esempio:** `ip route get 10.0.0.10`
+
+### `tcpdump`
+**Comando:** `tcpdump -ni INTERFACCIA FILTRO`
+**Spiegazione:** Cattura pacchetti per diagnosticare traffico e connessioni.
+**Esempio:** `tcpdump -ni eth0 port 443 -c 100`
+
+### `lsblk` e `findmnt`
+**Comando:** `lsblk -f`; `findmnt`
+**Spiegazione:** Mostrano dischi, filesystem e directory dove sono montati.
+**Esempio:** `lsblk -f; findmnt`
+
+### `rsync`
+**Comando:** `rsync -aHAX --numeric-ids [--dry-run] SORGENTE DESTINAZIONE`
+**Spiegazione:** Sincronizza dati preservando permessi, ACL e attributi estesi.
+**Esempio:** `rsync -aHAX --numeric-ids --dry-run /srv/app/ backup:/srv/app/`
+
+### `crontab`
+**Comando:** `crontab -l`
+**Spiegazione:** Mostra i job pianificati dall'utente corrente.
+**Esempio:** `crontab -l`
+
+### `systemctl enable`
+**Comando:** `systemctl enable --now SERVIZIO`
+**Spiegazione:** Abilita un servizio all'avvio e lo avvia immediatamente.
+**Esempio:** `systemctl enable --now app.service`
+
+## 14. Operatività enterprise — Esperto
+
+### `lsof`
+**Comando:** `lsof -p PID` oppure `lsof +L1`
+**Spiegazione:** Mostra file/socket aperti da un processo o file cancellati ancora occupati.
+**Esempio:** `lsof -p 1234; lsof +L1`
+
+### `nsenter`
+**Comando:** `nsenter -t PID -m -u -i -n -p -- COMANDO`
+**Spiegazione:** Esegue un comando dentro i namespace di un processo, utile per debug avanzato.
+**Esempio:** `nsenter -t 1234 -m -u -i -n -p -- ps aux`
+
+### `nft`
+**Comando:** `nft list ruleset`
+**Spiegazione:** Mostra le regole firewall attive senza modificarle.
+**Esempio:** `nft list ruleset`
+
+### `ausearch`
+**Comando:** `ausearch -m USER_LOGIN,USER_AUTH -ts recent`
+**Spiegazione:** Cerca accessi e autenticazioni nel Linux Audit log.
+**Esempio:** `ausearch -m USER_LOGIN,USER_AUTH -ts recent`
+
+### `getfacl`
+**Comando:** `getfacl -R DIRECTORY`
+**Spiegazione:** Mostra permessi ACL oltre ai normali owner/group/mode.
+**Esempio:** `getfacl -R /srv/app`
+
+### `sha256sum`
+**Comando:** `sha256sum FILE`
+**Spiegazione:** Calcola un'impronta per verificare che un file non sia cambiato.
+**Esempio:** `sha256sum release.bin`
+
+### `strace`
+**Comando:** `strace -ff -p PID -e trace=network,file`
+**Spiegazione:** Mostra le system call di un processo per individuare blocchi o file mancanti.
+**Esempio:** `strace -ff -p 1234 -e trace=network,file -tt -o /tmp/trace.%p`
+
+### `perf`
+**Comando:** `perf top -p PID`
+**Spiegazione:** Mostra in tempo reale quali funzioni consumano CPU.
+**Esempio:** `perf top -p 1234`
+
+### `coredumpctl`
+**Comando:** `coredumpctl list|info PID`
+**Spiegazione:** Elenca e analizza i dump creati da processi terminati in crash.
+**Esempio:** `coredumpctl info 1234`
+
+---
+
 ## Licenza
 
 Questo documento è distribuito con licenza MIT. Libero da usare, modificare e distribuire.
