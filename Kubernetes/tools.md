@@ -9,6 +9,31 @@
 
 ## Base
 
+### Orientamento e risorse
+
+```bash
+kubectl help; kubectl api-resources; kubectl api-versions
+kubectl explain pod; kubectl explain deployment.spec.template.spec.containers
+kubectl get all; kubectl get all -A; kubectl get ns
+kubectl get pods -A -o wide; kubectl get pods -A --show-labels
+kubectl get pod <pod> -o yaml; kubectl get pod <pod> -o json
+kubectl describe node <node>; kubectl describe svc <service>
+```
+
+### Manifest e operazioni elementari
+
+```bash
+kubectl create namespace production
+kubectl create deployment web --image=nginx:1.27 -n production
+kubectl expose deployment web --port=80 --target-port=80 -n production
+kubectl apply -f deployment.yaml; kubectl apply -k overlays/production
+kubectl diff -f deployment.yaml; kubectl delete -f deployment.yaml
+kubectl delete pod <pod> --grace-period=30
+kubectl label pod <pod> team=platform; kubectl annotate pod <pod> owner=platform
+kubectl scale deployment/web --replicas=3 -n production
+kubectl wait --for=condition=available deployment/web --timeout=120s -n production
+```
+
 ```bash
 # Client, cluster, contesto e namespace
 kubectl version --short
@@ -32,6 +57,31 @@ kubectl port-forward svc/<service> 8080:80
 ```
 
 ## Intermedio
+
+### Workload, job e configurazione
+
+```bash
+kubectl get deploy,rs,sts,ds,job,cronjob -A
+kubectl create job batch --image=busybox:1.36 -- echo ok
+kubectl create cronjob nightly --image=busybox:1.36 --schedule='0 2 * * *' -- date
+kubectl get cm,secret,pvc,sa -n production
+kubectl create configmap app-config --from-file=config/ -n production
+kubectl create secret generic app-secret --from-literal=TOKEN='<value>' -n production
+kubectl patch deployment web -p '{"spec":{"replicas":4}}' -n production
+kubectl autoscale deployment web --min=2 --max=10 --cpu-percent=70 -n production
+```
+
+### Servizi, ingress e storage
+
+```bash
+kubectl get svc,endpoints,endpointslice,ingress -A
+kubectl expose deployment web --type=ClusterIP --port=80 -n production
+kubectl get storageclass; kubectl get pv,pvc -A
+kubectl describe pvc <pvc> -n production
+kubectl get networkpolicy -A -o yaml
+kubectl get serviceaccount -n production
+kubectl create role pod-reader --verb=get,list,watch --resource=pods -n production
+kubectl create rolebinding app-reader --role=pod-reader --serviceaccount=production:app -n production
 
 ```bash
 # Deploy, rollout e rollback controllati
@@ -58,6 +108,47 @@ kubectl auth can-i get pods --as=system:serviceaccount:production:app
 ```
 
 ## Esperto
+
+### API, patch e controllo accessi
+
+```bash
+kubectl proxy --port=8080
+kubectl get --raw='/readyz?verbose'; kubectl get --raw='/version'
+kubectl auth can-i --list -n production
+kubectl auth can-i create deployments --as=system:serviceaccount:production:app -n production
+kubectl get role,rolebinding,clusterrole,clusterrolebinding -A
+kubectl get validatingwebhookconfiguration,mutatingwebhookconfiguration
+kubectl patch deployment web --type=json -p='[{"op":"replace","path":"/spec/replicas","value":3}]'
+kubectl replace --force -f manifest.yaml
+kubectl api-resources --verbs=list --namespaced -o name | xargs -n1 kubectl get --ignore-not-found
+```
+
+### Scheduling, rollout e osservabilità
+
+```bash
+kubectl get nodes -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints
+kubectl get pods -A --field-selector=status.phase!=Running
+kubectl get pods -A --sort-by=.status.containerStatuses[0].restartCount
+kubectl get --raw='/apis/metrics.k8s.io/v1beta1/nodes'
+kubectl rollout history statefulset/<name>; kubectl rollout restart deployment/<name>
+kubectl rollout status statefulset/<name> --timeout=10m
+kubectl logs deployment/<name> --all-containers --since=1h --prefix
+kubectl attach -it <pod> -c <container>; kubectl cp <pod>:/tmp/report ./report
+kubectl auth reconcile -f rbac.yaml --dry-run=server
+```
+
+### Backup, manutenzione e debug
+
+```bash
+kubectl get customresourcedefinition; kubectl get crd <name> -o yaml
+kubectl get leases -A; kubectl get componentstatuses 2>/dev/null
+kubectl debug pod/<pod> -it --copy-to=<pod>-debug --container=<container> -- sh
+kubectl debug node/<node> -it --image=nicolaka/netshoot --profile=general
+kubectl cordon <node>; kubectl drain <node> --ignore-daemonsets --delete-emptydir-data
+kubectl uncordon <node>
+kubectl delete pod <pod> --grace-period=0 --force
+kubectl get -A -o yaml > cluster-export.yaml
+```
 
 ```bash
 # Diagnostica nodi e scheduling

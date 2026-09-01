@@ -5,6 +5,33 @@ immutabili, registry privati e privilegi minimi.
 
 ## Base
 
+### CLI e immagini
+
+```bash
+docker --help; docker <command> --help; docker version; docker info
+docker images; docker image ls; docker pull alpine:3.20
+docker build -t myapp:dev .; docker tag myapp:dev registry.example.com/myapp:dev
+docker history myapp:dev; docker image inspect myapp:dev
+docker rmi myapp:dev; docker image prune
+docker save -o myapp.tar myapp:dev; docker load -i myapp.tar
+```
+
+### Container, volumi e reti
+
+```bash
+docker run --rm hello-world
+docker run -d --name web -p 8080:80 nginx:1.27
+docker ps; docker ps -a; docker start web; docker stop web; docker restart web
+docker rename web web-prod; docker logs -f web; docker exec -it web sh
+docker cp ./index.html web:/usr/share/nginx/html/index.html
+docker inspect web; docker top web; docker port web; docker stats --no-stream web
+docker volume create appdata; docker volume ls; docker volume inspect appdata
+docker run -d --mount source=appdata,target=/data alpine sleep 3600
+docker network create app-net; docker network ls; docker network inspect app-net
+docker network connect app-net web; docker network disconnect app-net web
+docker rm -f web; docker volume rm appdata; docker network rm app-net
+```
+
 ```bash
 # Stato del daemon, spazio e container
 docker version; docker info; docker system df
@@ -52,6 +79,42 @@ docker events --since 1h --filter type=container
 docker run --rm -it --network container:api nicolaka/netshoot
 # Pulizia limitata nel tempo; evitare prune -a indiscriminato in produzione
 docker system prune --filter 'until=168h'
+```
+
+### Compose completo, context e manifest
+
+```bash
+docker compose version; docker compose config; docker compose ps --all
+docker compose build --pull --no-cache; docker compose pull
+docker compose up -d --build --remove-orphans
+docker compose exec api sh; docker compose run --rm api sh
+docker compose restart api; docker compose stop; docker compose start
+docker compose cp api:/app/logs ./evidence/logs
+docker compose down --remove-orphans; docker compose down -v
+docker context ls; docker context show
+docker context create prod --docker 'host=ssh://ops@docker-host'
+docker --context prod ps
+docker manifest inspect registry.example.com/platform/api:1.4.2
+docker buildx ls; docker buildx du; docker buildx prune --filter until=168h
+```
+
+### Security, backup e Docker Engine
+
+```bash
+# Secrets e configurazione
+docker secret ls; docker config ls
+docker trust inspect --pretty registry.example.com/platform/api:1.4.2
+docker scout recommendations registry.example.com/platform/api:1.4.2
+# Backup di un volume e verifica dell'archivio
+docker run --rm -v appdata:/data -v "$PWD":/backup alpine \
+  tar -czf /backup/appdata.tgz -C /data .
+tar -tzf appdata.tgz >/dev/null
+# Daemon, plugin, swarm e nodi (solo se l'organizzazione usa Swarm)
+docker events --since 1h; docker plugin ls; docker info
+docker swarm init --advertise-addr <manager-ip>
+docker node ls; docker service ls; docker stack ls
+docker service ps <service>; docker service logs --follow <service>
+docker stack deploy -c stack.yml production; docker stack services production
 ```
 
 ---

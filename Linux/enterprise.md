@@ -5,6 +5,31 @@ ambiente e change approval prima di modificare servizi, rete o storage.
 
 ## Base
 
+### Navigazione, file e testo
+
+```bash
+pwd; ls; ls -lah; cd /var/log
+mkdir -p /srv/app/{config,data,logs}; touch /tmp/test.txt
+cp -a source/ destination/; mv old.conf new.conf; rm -i file.txt
+file archive.tar.gz; stat /etc/hosts; realpath ./config.yaml
+cat file.txt; less file.txt; head -n 20 file.txt; tail -n 50 file.txt
+grep -n 'pattern' file.txt; sort file.txt | uniq -c; wc -l file.txt
+cut -d: -f1 /etc/passwd; sed -n '1,80p' file.txt; awk '{print $1}' file.txt
+find /var/log -type f -name '*.log' -mtime -7 -print
+tar -czf backup.tgz /srv/app; tar -tzf backup.tgz; tar -xzf backup.tgz
+```
+
+### Utenti, permessi e pacchetti
+
+```bash
+whoami; id; groups; who; w
+sudo -l; chmod 640 config.yaml; chown app:app config.yaml
+getent passwd app; getent group app; passwd -S app
+sudo apt update; apt-cache policy nginx; sudo apt install nginx
+sudo apt remove nginx; sudo apt autoremove
+# RHEL/Fedora: dnf check-update; sudo dnf install nginx; rpm -qa | grep nginx
+```
+
 ```bash
 # Identità dell'host, versione e risorse
 hostnamectl; cat /etc/os-release; uptime; free -h; df -hT
@@ -50,6 +75,41 @@ lsof -p $(pidof nginx | awk '{print $1}')
 strace -ff -p <PID> -e trace=network,file -tt -o /tmp/trace.%p
 # Verifica firewall senza cambiare configurazione
 nft list ruleset; ufw status verbose 2>/dev/null || true
+```
+
+### Networking avanzato, storage e automazione
+
+```bash
+# Interfacce, route, ARP e diagnostica TCP
+ip -br addr; ip route; ip neigh; ethtool eth0
+tcpdump -ni eth0 host 10.0.0.10 and port 443 -c 100
+traceroute -T -p 443 api.example.com; mtr -rwzc 20 api.example.com
+dig +trace api.example.com; nc -vz api.example.com 443
+# Filesystem, mount, LVM e quota (verificare device prima di modificare)
+lsblk -f; blkid; findmnt; mount | column -t
+df -ih; du -xhd1 /var | sort -h; lsof +L1
+pvs; vgs; lvs -a -o +devices; quota -s
+# Pianificazione e gestione delle unità
+crontab -l; systemctl list-timers --all
+systemctl cat app.service; systemctl daemon-reload
+systemctl enable --now app.service; systemctl restart app.service
+```
+
+### Diagnostica di basso livello e compliance
+
+```bash
+# Processi, file descriptor, namespace e cgroup
+ps -ef --forest; pgrep -a -f app; pstree -ap <PID>
+readlink /proc/<PID>/exe; ls -l /proc/<PID>/fd | head
+nsenter -t <PID> -m -u -i -n -p -- ps aux
+systemd-cgtop; ulimit -a; sysctl -a 2>/dev/null | sort
+# Integrità, cifratura e MAC
+sha256sum release.bin; gpg --verify release.sig release.bin
+getfacl -R /srv/app; sestatus 2>/dev/null || aa-status 2>/dev/null
+find / -xdev -type f -perm /6000 -ls 2>/dev/null
+# Core dump, syscall e performance (solo con approvazione)
+coredumpctl list; coredumpctl info <PID>
+perf top -p <PID>; strace -ff -p <PID> -e trace=network,file -tt
 ```
 
 ---
