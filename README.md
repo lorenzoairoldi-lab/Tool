@@ -1,28 +1,35 @@
 # Tool
 
-Collection of guides, commands and quick references for DevOps, system administration and software development tools.
+Raccolta pratica di comandi e quick reference per amministrazione di sistemi,
+container e piattaforme cloud-native in contesti aziendali.
 
----
+## Guide disponibili
 
-## Structure
+| Area | Guida | Contenuti |
+|---|---|---|
+| Linux | [Linux/tools.md](./Linux/tools.md) | Comandi Linux da Base a Esperto: file, utenti, processi, rete, storage, sicurezza, systemd e troubleshooting. |
+| Docker | [Docker/tools.md](./Docker/tools.md) | Docker e Compose: immagini, container, volumi, reti, registry, sicurezza, BuildKit e Swarm. |
+| Kubernetes | [Kubernetes/tools.md](./Kubernetes/tools.md) | `kubectl` da Base a Esperto: workload, rollout, networking, storage, RBAC, nodi e debug. |
 
-```
-Tool/
-├── README.md
-├── Linux/       # Linux tools and commands
-└── Docker/      # Docker commands and references
-```
+Ogni cartella contiene un unico file operativo `tools.md`. Ogni comando è documentato
+con questo schema:
 
-Each section contains an introductory `README.md` and a `tools.md` file with the complete command reference.
+- **Comando** — la sintassi da eseguire;
+- **Spiegazione** — cosa fa e quando è utile;
+- **Esempio** — un caso pratico pronto da adattare.
 
----
+## Livelli di difficoltà
 
-## License
+- **Base:** operazioni quotidiane e comandi fondamentali.
+- **Intermedio:** gestione dei servizi, deploy, risorse, rete e automazione.
+- **Esperto:** troubleshooting avanzato, sicurezza, audit, performance e manutenzione.
 
-## Sections
+## Uso sicuro
 
-- `Linux/` — comandi generali e operativi enterprise (`tools.md`).
-- `Docker/` — comandi Docker/Compose e operatività enterprise (`tools.md`).
-- `Kubernetes/` — comandi `kubectl` organizzati per Base, Intermedio ed Esperto.
+Prima di eseguire un comando verifica ambiente, contesto, namespace e target. I comandi
+che eliminano risorse, modificano firewall o permessi, eseguono `drain`, `prune` o
+rollback devono essere eseguiti con autorizzazione e con un piano di ripristino.
+
+## Licenza
 
 MIT
