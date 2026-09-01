@@ -10,6 +10,7 @@ container e piattaforme cloud-native in contesti aziendali.
 | Linux | [Linux/tools.md](./Linux/tools.md) | Comandi Linux da Base a Esperto: file, utenti, processi, rete, storage, sicurezza, systemd e troubleshooting. |
 | Docker | [Docker/tools.md](./Docker/tools.md) | Docker e Compose: immagini, container, volumi, reti, registry, sicurezza, BuildKit e Swarm. |
 | Kubernetes | [Kubernetes/tools.md](./Kubernetes/tools.md) | `kubectl` da Base a Esperto: workload, rollout, networking, storage, RBAC, nodi e debug. |
+| Terraform | [Terraform/tools.md](./Terraform/tools.md) | Infrastructure as Code: provider, plan/apply, state, moduli, backend, workspace e troubleshooting. |
 
 Ogni cartella contiene un unico file operativo `tools.md`. Ogni comando è documentato
 con questo schema:
